@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Trường hợp đã có element trong DOM -->
+    <!-- <h1 id="heading">Hello guys!</h1> -->
+
+    <!--
+        document.createElement() để làm gì?
+
+        1. document.createElement()
+        2. document.body.appendChild()
+        3. console.dir()
+        4. innerText, id, className, style
+
+        className: là 1 property name có trong javaScript element
+    -->
+
+        <!-- Vd có 1 element root -->
+        <div id="root"></div>
+    <script>
+        // Lấy ra element khi trong DOM có sẫn element
+            // const h1 = document.querySelector('#heading');
+
+            // console.log(h1); // lúc này output sẽ trả về kết quả là 1 object
+            // console.dir(h1); // hàm này sẽ in ra dưới dạng object
+
+        // Trường hợp chưa có element trong DOM
+            // Tạo 1 element
+            // const h1 = document.createElement('h1');
+
+            // Thêm text cho element
+            // h1.innerText = 'Hello guys!'
+
+            // console.log(h1); // Lúc này element mới chỉ đc lưu vào bộ nhớ, chứ chưa đc render ra DOM
+
+            // Lấy element body, rồi dùng appendChild() để thêm thằng con vào, cụ thể con ở đây là h1
+            // document.body.appendChild(h1); // Lúc này nó sẽ render h1 ra DOM
+
+        // Vd: có 1 element root
+            // const root = document.getElementById('root');
+            // const h1 = document.createElement('h1');
+
+            // h1.innerText = 'Hello guys!' // thêm text
+            // h1.id = 'heading' // thêm id 
+            // h1.className = 'test' // thêm class
+            // h1.style = 'color: red; font-size: 20px' // thêm style cho thẻ
+
+            // assign để property 1 object mới cho object cũ, như vd tức là gán màu mới cho màu cũ
+            // vế đầu h1.style là object cũ, vế sau là object mới
+            // Object.assign(h1.style, {
+            //     color: 'blue',
+
+            //     // Đặt tên biến ở JavaScript sẽ k viết đc dưới dạng có dấu - hoặc đặt key có object
+            //     backgroundColor: '#333' // dùng cú pháp Camel Case để đặt tên biến, các chữ cái đầu k viết hoa, từ chữ cái thứ 2 viết hoa
+            // })
+
+            // console.log(h1); 
+
+            // root.appendChild(h1); // Lúc này sẽ render h1 vào trong root và hiện ra DOM
+
+    </script>
+</body>
+</html>

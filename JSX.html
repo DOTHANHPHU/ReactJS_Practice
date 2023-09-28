@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSX</title>
+    <script crossorigin src="https://unpkg.com/react@17.0.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <!--
+        JSX là gì? Tại sao cần JSX?
+        ** Lưu ý khi dùng JSX
+            1. Có thể tạo ra biến và gán được JSX cho biến đó
+                vd: const ul =  <ul>
+                                    <li>JavaScript</li>
+                                    <li>ReactJS</li>
+                                </ul>
+            
+            2. JSX có thể hỗ trợ viết đan xen code JavaScript vào giữa
+            - Để viết xen lẫn code JavaScript vào giữa hãy sd dấu {...code JS}
+            - Khi dùng style, truyền value vào dưới dạng {} thì dùng dấu {}
+                vd: style = {} 
+
+            ** Khi muốn viết code JavaScript vào style = {} hãy làm như sau
+            -> style = {{}} -> dấu {} đầu là để có thể viết JS, dấu {} thứ 2 để viết cú pháp style
+
+            ** Với React.createElement thì prop "style" sẽ nhận value là object các bạn nhé, truyền chuỗi sẽ bị lỗi.
+
+        JSX -> JavaScript XML
+
+        1. Luôn dùng React.createElement()? Vấn đề?
+            - Qua những bài học trước anh em đã biết cách tạo ra React element với React.createElement() rồi đúng không? 
+            - Nếu dùng cách này để code giao diện chắc chắn sẽ rất khó, chính vì vậy JSX ra đời giúp developer như chúng ta có cú pháp "ngọt ngào" hơn.
+        
+        2. JSX? Live demo: https://bit.ly/2VOIMN7
+        
+        3. JSX không phải là HTML, Cần có JavaScript, Babel để dùng JSX
+            - Tiếp theo ta cần thư viện Babel, JSX cần được phân tích cú pháp và chuyển đổi về code Javascript.
+
+        4. JSX và React-DOM?
+            - Qua link này để Dùng thư viện Bable để viết code: https://legacy.reactjs.org/docs/add-react-to-a-website.html#optional-try-react-with-jsx 
+                -> rồi chọn Optional: Try React with JSX (no bundler necessary!)
+
+            - Thư viện Babel: <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+            
+            - Tiếp đến phải ngăn chặn việt thực thi code trong thẻ script bằng cách thêm type
+
+    -->
+    <div id="root"></div>
+    <script type="text/babel">
+
+        // Cách viết React-DOM
+            // const ulReact = React.createElement(
+            //         'ul',
+            //         null,
+            //         React.createElement('li', null, 'JavaScript'),
+            //         React.createElement('li', null, 'ReactJS'),
+            //     );
+
+            //     ReactDOM.render(ulReact, document.getElementById('root'));
+
+        // Cách viết JSX
+        // Nhớ thêm type="text/babel" vào trong thẻ script
+            // const ul =  <ul>
+            //                 <li>JavaScript</li>
+            //                 <li>ReactJS</li>
+            //             </ul>
+
+            //     ReactDOM.render(ul, document.getElementById('root'));
+
+        /* 
+            Bài tập: Render ra 3 li trong ul tương ứng vs 3 object trong course
+        */
+
+            const reactCourse = 'ReactJS F8'
+            const courses = [
+                {
+                    name: 'HTML/ CSS',
+                },
+
+                {
+                    name: 'Responsive web design',
+                },
+
+                {
+                    name: 'ReactJS',
+                }
+            ]
+
+            const ul =  <ul>
+                            { // Dùng {} để viết code JS vào
+                                // Dùng map để lặp qua các courses, sau đó trả về các course tương ứng vào thẻ li
+                                courses.map(course =>
+                                    <li>{course.name}</li>
+                                )
+                            }
+                        </ul>
+
+            ReactDOM.render(ul, document.getElementById('root'))
+    </script>
+</body>
+</html>

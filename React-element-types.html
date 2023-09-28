@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React element types</title>
+    <script crossorigin src="https://unpkg.com/react@17.0.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <!--
+        **Hooks
+
+        1. React element types: string, function/ class
+            - Wrapper
+                - Header -> Header component
+                - Content -> Content component
+                - Footer -> Footer component
+        
+        ** Nếu có children tức là text nội dung ở trong thì truyền <Header></Header>
+            còn k có children thì truyền <Header />
+        
+        2. Biểu diễn đơn giản với JSX
+
+        - Tại sao phải chia component?
+        Khi chia component hợp lý sẽ giúp dự án có cấu trúc rõ ràng, có tính kế thừa, các component chỉ cần viết 1 lần và có thể
+        dùng ở nhiều chỗ.
+    -->
+    <div id="app"></div>
+
+    <script type="text/babel">
+
+        // vd: Dùng func components, nhớ viết hoa chữ cái đầu tên Func
+        // function Header() {
+        //     return (
+        //         <div className="header">New Header</div>
+        //     )
+        // }
+
+        // vd: Dùng class
+        // class Content extends React.Component {
+        //     render() {
+        //         return (
+        //             <div className="content">New Content</div>
+        //         )
+        //     }
+        // }
+
+        // const app1 = (
+        //     <div className="wrapper">
+        //         <Header></Header>
+        //         <Content />
+        //         <div className="footer">Footer</div>
+        //     </div>
+        // )
+
+        // ReactDOM.render(app1, document.getElementById("app"))
+        // console.log(app1);
+        /* 
+            Lúc này app sẽ có type là thẻ div, class là wrapper
+            - Trong app có 3 children là Header, Content, Footer
+            - Trong header có: type = func Header, và cái func đó sẽ return ra JSX
+            - Trong content có: type = class Content, có thể coi nó là func Content, và cũng trả về JSX
+        */
+
+        // ----------------------------------------------------------------
+        /* 
+            Bài tập: 
+                - Tạo 1 component tên là PostItem và trả về đoạn code trong posts-list
+                - Sau đó thay thế component PostItem vào trong posts-list
+
+                - Dùng map: Để lặp qua mỗi phần tử trong mảng postsData. Mỗi phần tử trong mảng sẽ tương ứng với một mục bài viết.
+                - Dùng key: Mỗi mục bài viết được đánh dấu với một key độc đáo để giúp React xác định và theo dõi mục nào được thêm, cập nhật hoặc xóa khi dữ liệu thay đổi.
+        */
+
+        // Tạo 1 danh sách 
+        const postsData = [
+            {
+                imgSrc: 'https://files.fullstack.edu.vn/f8-prod/blog_posts/7940/64a645ea70312.png',
+                postTitle: '`Tất tần tật` về cải thiện Performance của 1 trang web',
+                postDesc: 'Ở bài viết này, chúng ta cùng nhau tìm hiểu về các vấn đề liên quan đến Performance ở phía FE. Không dài dòng nữa,...',
+                postPublished: '15 ngày trước·8 phút đọc',
+            },
+            {
+                imgSrc: 'https://files.fullstack.edu.vn/f8-prod/blog_posts/7922/64a23b234c52e.png',
+                postTitle: '"Kết nối trước" với preconnect, prefetch để làm gì?',
+                postDesc: 'Ở đây chắc hẳn ai cũng từng dùng google fonts để nhúng fonts vào...',
+                postPublished: '19 ngày trước·3 phút đọc',
+            },
+            {
+                imgSrc: 'https://files.fullstack.edu.vn/f8-prod/blog_posts/6630/63fd6b687b938.jpg',
+                postTitle: 'Ngành gì đang hot hiện nay? Top ngành nghề dự báo trở thành xu thế',
+                postDesc: 'Nếu bạn đang phân vân trong việc chọn ngành, chuyển ngành thì có thể tham khảo bài viết này để biết ngành gì đang hot hiện nay và...',
+                postPublished: '5 tháng trước·7 phút đọc',
+            },
+        ]
+
+        // Tạo 1 component
+        function PostItem() {
+            return (
+                postsData.map((post, index) => ( 
+                    <div className="post-item" key={index}> 
+                        <img src={post.imgSrc} />
+                        <h2 className="post-title">{post.postTitle}</h2>
+                        <p className="post-desc">{post.postDesc}</p>
+                        <p className="post-published">{post.postPublished}</p>
+                    </div>
+                )
+                )
+            )
+        }
+
+        const app2 = (
+            <div className="posts-list">
+                <PostItem />
+            </div>
+        )
+
+        ReactDOM.render(app2, document.getElementById('app'))
+    </script>
+</body>
+
+</html>

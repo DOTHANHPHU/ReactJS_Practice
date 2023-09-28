@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSX</title>
+    <script crossorigin src="https://unpkg.com/react@17.0.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <!--
+        1. Tại sao khi code thuần dùng map phải join()
+        2. Gặp lỗi khi render từ mảng (prop "key")
+        3. Không render được 2 elements cùng lúc
+    -->
+    <div id="root"></div>
+    <script type="text/babel">
+
+        // const reactCourse = 'ReactJS F8'
+        // const courses = [
+        //     {
+        //         name: 'HTML/ CSS',
+        //     },
+
+        //     {
+        //         name: 'Responsive web design',
+        //     },
+
+        //     {
+        //         name: 'ReactJS',
+        //     }
+        // ]
+
+        /* 
+            2. Gặp lỗi khi render từ mảng (prop "key")
+            tức là nếu nó có báo "key" prop
+            hoặc báo trùng key thì xử lý như sau
+            dựa vào bài tập bên file JSX.html để xem
+        */
+        // const jsx = <ul>
+        //     { 
+        //         courses.map((course,index) =>
+        //             <li key={index}>{course.name}</li>
+        //         )
+        //     }
+        // </ul>
+
+        // ReactDOM.render(jsx, document.getElementById('root'))
+
+// ------------------------------------------------------------------------
+/* 
+    3. Không render được 2 elements cùng lúc và cách khắc phục
+*/
+    // vd: Khi render dùng JSX
+    // C1: Thêm thẻ div bao quanh: cách này k tối ưu bởi vì bị dư thẻ
+        // const ul1 = (
+        //     <div>
+        //         <h1>Heading 1</h1>
+        //         <h2>Heading 2</h2>
+        //     </div>
+        // )
+
+    // C2: Dùng thẻ <React.Fragment></React.Fragment>: Tránh bị dư thẻ
+    // React.Fragment: Đơn giản là cái thẻ để wrapper, bao quanh
+        // const ul2 = (
+        //         <React.Fragment>
+        //             <h1>Heading 1</h1>
+        //             <h2>Heading 2</h2>
+        //         </React.Fragment>
+        //     )
+
+    // vd: Khi render dùng React.createElement
+    // Lúc này type sẽ dùng React.Fragment
+        const ul3 = React.createElement(
+            React.Fragment,
+            null,
+            React.createElement('h1', null, 'Heading 1'),
+            React.createElement('h2', null, 'Heading 2'),
+        )
+
+        ReactDOM.render(ul3, document.getElementById('root'))
+    </script>
+</body>
+
+</html>

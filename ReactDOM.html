@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReactDOM</title>
+    <script crossorigin src="https://unpkg.com/react@17.0.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.production.min.js"></script>
+
+</head>
+<body>
+    <!--
+        ** Dán 2 thư viện: react, react dom vào
+        ** Lưu ý phải dán thư viện react trước thư viện react dom
+
+        1. Tại sao phải sd React-DOM
+            - Để render React Element ra trình duyệt
+            - React DOM là thư viện, là cầu nối giữa React và DOM
+
+        2. Tại sao lại tách React-DOM ra:
+
+        3. Render UL
+        Chữa bài - Tạo:
+                    <div class="post-item">
+                        <h2 title="Học React tại F8">Học ReactJS</h2>
+                        <p>Học ReactJS từ cơ bản tới nâng cao</p>
+                    </div>
+    --> 
+    <div id="root"></div>
+    <script>
+        // Chữa bài:
+            // const postItem = React.createElement(
+            //         'div',
+            //         {
+            //             className: 'post-item',
+            //         },
+            //         React.createElement('h2', { title: 'Học React tại F8' }, 'Học ReactJS'),
+            //         React.createElement('p', null, 'Học ReactJS từ cơ bản tới nâng cao'),
+            //     );
+
+        // Get root Element
+            // const root = document.getElementById('root');
+
+        // Dùng React-DOM để render UI
+        /* 
+            render(element, container, callback)
+        */
+            ReactDOM.render(postItem, root)
+
+    // Render các kết quả từ bài tập bên React.createElement. câu 5, 6
+        // Câu 5:
+            // const h1React = React.createElement('h1', {
+            //     title: 'Hello',
+            //     className: 'Heading'
+            // }, 'Hello guys!');
+
+        // render
+            // const root = document.getElementById('root');
+
+            // ReactDOM.render(h1React, root);
+
+        // Câu 6: 
+            const ulReact = React.createElement(
+                'ul',
+                {
+                    id: 'ul-id'
+                },
+                React.createElement('li', { id: 'li-1' },'JavaScript'),
+                React.createElement('li', null, 'ReactJS'),
+            );
+
+        // render
+            // const root = document.getElementById('root');
+
+            // ReactDOM.render(ulReact, root);
+
+        // cách viết ngắn gọn
+            ReactDOM.render(ulReact, document.getElementById('root'));
+
+    </script>
+</body>
+</html>

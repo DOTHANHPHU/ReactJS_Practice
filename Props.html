@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Props</title>
+    <script crossorigin src="https://unpkg.com/react@17.0.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <!--
+        Props
+
+        1. React elements
+            - Sử dụng props giống như với attribute của thẻ HTML
+            - 2 props: class, for => className, htmlFor
+                xem vd về for ở bài props, trong ghi chú
+            - Phải tuân theo quy ước có sẵn
+
+        2. React components
+            - Sử dụng props giống như đối số cho Component. 
+                Xem vd trong ghi chú bài Props và ở dưới
+            ** Lúc này nó ném object props vào type func PostItem dưới dạng đối số
+            
+            - Tự do đặt tên props
+                - Đặt theo camelCase
+                - *Có thể bao gồm dấu gạch ngang
+
+        ** Chú ý: 
+            - Props "key" là prop đặc biệt
+                => Chỉ dùng khi đưa React Elements hay React Components nằm vào trong Array
+
+            - Props cơ bản là đối số của Component
+                => Props có thể là bất cứ kiểu dữ liệu gì
+            - Sử dụng destructuring
+
+            - Callback là 1 hàm đc truyền qua đối số 1 hàm khác
+                => Truyền 1 hàm qua props đc coi là Callback
+
+            - Props dùng để truyền dữ liệu từ component cha xuống component con, tương tự như cách truyền đối số khi gọi hàm
+    -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // Ví dụ dùng props
+
+        // Lúc viết bình thường
+        // PostItem.js
+        // function PostItem() {
+        //     return (
+        //         <div className="post-item">
+        //             <img 
+        //                 src="https://files.fullstack.edu.vn/f8-prod/blog_posts/7922/64a23b234c52e.png" 
+        //                 alt="'Kết nối trước' với preconnect" />
+        //             <h2 className="post-title">Kết nối trước" với preconnect, prefetch để làm gì?</h2>
+        //             <p className="post-desc">Ở đây chắc hẳn ai cũng từng dùng google fonts để nhúng fonts vào...</p>
+        //             <p className="post-published">19 ngày trước·3 phút đọc</p>
+        //         </div>
+
+        //     )
+        // }
+
+        // App.js
+        // function App() {
+        //     return (
+        //         <div id="wrapper">
+        //             <PostItem 
+
+        //             />
+        //         </div>
+        //     )
+        // }
+
+        // Dùng destructuring
+        // function PostItem({
+        //     image,
+        //     title,
+        //     description,
+        //     published,
+        // }) {
+
+        //     return (
+        //         <div className="post-item">
+        //             <img
+        //                 src={image}
+        //                 alt={title}
+        //             />
+        //             <h2 className="post-title">{title}</h2>
+        //             <p className="post-desc">{description}</p>
+        //             <p className="post-published">{published}</p>
+        //         </div>
+
+        //     )
+        // }
+        // Lúc viết dùng props
+        // Truyền vào func PostIem 1 đối số là props
+        // Lưu ý: trong <PostIem /> không truyền props nào thì sẽ là object rỗng, hiện ra undefined
+        // PostItem.js
+        // function PostItem(props) {
+        //     console.log(props); // lấy ra tất cả props để xem ví dụ truyền kiểu dữ liệu khác
+        //     return (
+        //         <div className="post-item">
+        //             <img
+        //                 src= {props.image}
+        //                 alt= {props.title}
+        //             />
+        //             <h2 className="post-title">{props.title}</h2>
+        //             <p className="post-desc">{props.description}</p>
+        //             <p className="post-published">{props.published}</p>
+        //         </div>
+
+        //     )
+        // }
+
+        // App.js
+        // function App() {
+        //     return (
+        //         <div id="wrapper">
+        //             <PostItem
+        //                 title = "1 'Kết nối trước' với preconnect, prefetch để làm gì?"
+        //                 image = "https://files.fullstack.edu.vn/f8-prod/blog_posts/7922/64a23b234c52e.png"
+        //                 description = "1 Ở đây chắc hẳn ai cũng từng dùng google fonts để nhúng fonts vào..."
+        //                 published = "1 19 ngày trước·3 phút đọc"
+        //                 // Ví dụ về việc thêm các kiểu dữ liệu khác vào props
+        //                 // Nhớ thêm {} để viết code JS
+        //                 // Vd: thêm 1 array, trong array có 2 object
+        //                 data = {[ {a: 1}, {b: 2} ]}
+
+        //                 // vd truyền vào callback
+        //                 // Nhớ thêm {} để viết code JS
+        //                 callback = {() => {
+
+        //                 }}
+        //             />
+
+        //             <PostItem
+        //                 title="2 3 'Kết nối trước' với preconnect, prefetch để làm gì?"
+        //                 image="https://files.fullstack.edu.vn/f8-prod/blog_posts/7922/64a23b234c52e.png"
+        //                 description="2 3 Ở đây chắc hẳn ai cũng từng dùng google fonts để nhúng fonts vào..."
+        //                 published="2 3 19 ngày trước·3 phút đọc"
+        //             />
+
+        //             <PostItem
+        //                 title="3 'Kết nối trước' với preconnect, prefetch để làm gì?"
+        //                 image="https://files.fullstack.edu.vn/f8-prod/blog_posts/7922/64a23b234c52e.png"
+        //                 description="3 Ở đây chắc hẳn ai cũng từng dùng google fonts để nhúng fonts vào..."
+        //                 published="3 19 ngày trước·3 phút đọc"
+        //             />
+        //         </div>
+        //     )
+        // }
+
+        // index.js
+        // ReactDOM.render(<App />, document.getElementById('root'))
+
+        /*  
+            Bài tập: Render những course theo api: https://api-gateway.fullstack.edu.vn/api/pro-courses
+            - Render title, image_url, description, students_count
+    
+        */
+
+        const courses = [
+            {
+                "id": 15,
+                "title": "HTML CSS Pro",
+                "slug": "htmlcss",
+                "description": "T\u1EEB c\u01A1 b\u1EA3n t\u1EDBi chuy\u00EAn s\u00E2u, th\u1EF1c h\u00E0nh 8 d\u1EF1 \u00E1n, h\u00E0ng tr\u0103m b\u00E0i t\u1EADp, trang h\u1ECFi \u0111\u00E1p ri\u00EAng, c\u1EA5p ch\u1EE9ng ch\u1EC9 sau kh\u00F3a h\u1ECDc v\u00E0 mua m\u1ED9t l\u1EA7n h\u1ECDc m\u00E3i m\u00E3i.",
+                "image": "courses/15/62f13d2424a47.png",
+                "icon": "courses/15/62385d6c63dfa.png",
+                "video_type": "upload",
+                "video": null,
+                "old_price": 2500000,
+                "price": 1299000,
+                "pre_order_price": 699000,
+                "students_count": 3837,
+                "is_pro": true,
+                "is_coming_soon": false,
+                "is_selling": true,
+                "published_at": "2022-08-18T17:00:00.000000Z",
+                "is_registered": false,
+                "user_progress": 0,
+                "last_completed_at": null,
+                "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png",
+                "icon_url": "https://files.fullstack.edu.vn/f8-prod/courses/15/62385d6c63dfa.png",
+                "video_url": "",
+                "landing_page_url": "/landing/htmlcss",
+                "is_pre_order": false,
+                "is_published": true
+            },
+            {
+                "id": 27,
+                "title": "Ng\u00F4n ng\u1EEF ti\u1EC1n x\u1EED l\u00FD Sass",
+                "slug": "sass",
+                "description": "\u0110\u00E2y l\u00E0 m\u1ED9t kh\u00F3a h\u1ECDc nh\u1ECF \u0111\u01B0\u1EE3c t\u00E1ch ra t\u1EEB 2 ch\u01B0\u01A1ng h\u1ECDc trong kh\u00F3a HTML CSS Pro. Ki\u1EBFn th\u1EE9c v\u1EC1 Sass trong kh\u00F3a n\u00E0y b\u1EA1n c\u00F3 th\u1EC3 \u00E1p d\u1EE5ng ngay v\u00E0o c\u00E1c d\u1EF1 \u00E1n c\u1EE7a b\u1EA1n.",
+                "image": "courses/27/64e184ee5d7a2.png",
+                "icon": "courses/27/64e0daf212fad.png",
+                "video_type": "upload",
+                "video": "courses/27/oeT5zTmdk8KlHwU2meMJpnR7uihkX6OvYxnkjiB9.mp4",
+                "old_price": 400000,
+                "price": 299000,
+                "pre_order_price": 0,
+                "students_count": 0,
+                "is_pro": true,
+                "is_coming_soon": false,
+                "is_selling": true,
+                "published_at": "2023-08-19T15:06:00.000000Z",
+                "is_registered": false,
+                "user_progress": 0,
+                "last_completed_at": null,
+                "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/27/64e184ee5d7a2.png",
+                "icon_url": "https://files.fullstack.edu.vn/f8-prod/courses/27/64e0daf212fad.png",
+                "video_url": "https://videos.fullstack.edu.vn/f8-prod/courses/27/oeT5zTmdk8KlHwU2meMJpnR7uihkX6OvYxnkjiB9.mp4",
+                "landing_page_url": "/landing/sass",
+                "is_pre_order": false,
+                "is_published": true
+            },
+            {
+                "id": 19,
+                "title": "JavaScript Pro",
+                "slug": "javascript-pro",
+                "description": "Kh\u00F3a h\u1ECDc JavaScript Pro",
+                "image": "courses/19/62f13cb607b4b.png",
+                "icon": "courses/19/62f13cb685c81.png",
+                "video_type": "upload",
+                "video": null,
+                "old_price": 0,
+                "price": 0,
+                "pre_order_price": 0,
+                "students_count": 0,
+                "is_pro": true,
+                "is_coming_soon": true,
+                "is_selling": false,
+                "published_at": "2023-11-30T17:00:00.000000Z",
+                "is_registered": false,
+                "user_progress": 0,
+                "last_completed_at": null,
+                "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/19/62f13cb607b4b.png",
+                "icon_url": "https://files.fullstack.edu.vn/f8-prod/courses/19/62f13cb685c81.png",
+                "video_url": "",
+                "landing_page_url": "/landing/javascript-pro",
+                "is_pre_order": false,
+                "is_published": false
+            },
+            {
+                "id": 20,
+                "title": "NextJS Pro",
+                "slug": "reactjs-pro",
+                "description": "Kh\u00F3a h\u1ECDc NextJS Pro",
+                "image": "courses/20/648020fc16597.png",
+                "icon": "courses/20/648020fcc8000.png",
+                "video_type": "upload",
+                "video": null,
+                "old_price": 0,
+                "price": 0,
+                "pre_order_price": 0,
+                "students_count": 0,
+                "is_pro": true,
+                "is_coming_soon": true,
+                "is_selling": false,
+                "published_at": "2024-03-31T17:00:00.000000Z",
+                "is_registered": false,
+                "user_progress": 0,
+                "last_completed_at": null,
+                "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/20/648020fc16597.png",
+                "icon_url": "https://files.fullstack.edu.vn/f8-prod/courses/20/648020fcc8000.png",
+                "video_url": "",
+                "landing_page_url": "/landing/reactjs-pro",
+                "is_pre_order": false,
+                "is_published": false
+            }
+        ]
+
+        // CourseItem.js
+            function CourseItem({
+                id,
+                image, 
+                title, 
+                description, 
+                studentCount,
+            }) {
+                return (
+                    <div className="course-item">
+                        <img src={image} />
+                        <h2 className="course-title">{title}</h2>
+                        <p className="course-desc">{description}</p>
+                        <p className="course-studentsCount">Số học sinh tham gia: {studentCount}</p>
+                    </div>
+
+                )
+            }
+
+            // App.js
+            function App() {
+                return (
+                    <div id="wrapper">
+                        {
+                            courses.map(course => (
+                                <CourseItem
+                                    key={course.id}
+                                    image={course.image_url}
+                                    title={course.title}
+                                    description={course.description}
+                                    studentCount={course.students_count}
+                                />
+                            ))
+                        }
+                    </div>
+                )
+            }
+
+            // index.js
+            ReactDOM.render(<App />, document.getElementById('root'))
+
+
+    </script>
+</body>
+
+</html>

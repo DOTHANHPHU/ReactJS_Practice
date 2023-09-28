@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quy ước đặt tên components?</title>
+    <script crossorigin src="https://unpkg.com/react@17.0.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <!--
+            Làm việc với JSX
+    
+                Phần I: 
+                - Xử lý DOM events
+                    - Component do chúng ta định nghĩa phải viết 
+                        IN HOA KÍ TỰ ĐẦU
+                    - Chọn component trong 1 object
+                    - Booleans, Null & Undefined không được render
+                    - Kết hợp toán tử logic để render theo điều kiện
+    
+                Phần II:
+                - Props trong JSX
+                    - <YourComponent
+                        propName1 = "String literals"
+                        propName2 = {expression}
+                    />
+    
+                    - Props default to "true"
+                    - Spread/ Rest props
+                    - Children prop
+                        - <YourComponent>String literals</YourComponent>
+                        - <YourComponent>{expression}</YourComponent>
+                    - Render props
+        -->
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        // Ví dụ quy tắc đặt tên components
+        // VD1
+        // Tạo component
+        // const Form = {
+        //     // Input trở thành func -> Biến func này thành 1 func component
+        //     Input() {
+        //         return <input />
+        //     },
+
+        //     Checkbox() {
+        //         return <input type="checkbox" />
+        //     }
+        // }
+
+        /* 
+            - Render input, checkbox theo cú pháp JSX: <Tên component.func component />
+                vd: <Form.Input /> 
+        */
+        // App.js
+        // function App() {
+        //     return (
+        //         <div id="wrapper">
+        //             <Form.Input />
+        //             <Form.Checkbox />
+        //         </div>
+        //     )
+        // }
+
+        // index.js
+        // ReactDOM.render(<App />, document.getElementById('root'))
+
+    //----------------------------------------------------------------
+        // VD2:
+        // const Form = {
+            
+        //     Input() {
+        //         return <input />
+        //     },
+
+        //     Checkbox() {
+        //         return <input type="checkbox" />
+        //     }
+        // }
+
+        // App.js
+        // function App() {
+
+        //     /*
+        //         vd2: Cho 1 biến
+        //         Yêu cầu: Ở trong <div id="wrapper">, render Input/ Checkbox nhưng tuân theo giá trị của thk type đang là gì
+        //             vd: type = 'Input'; -> render Input
+
+        //     */
+        //     const type = 'Input';
+
+        //     /*
+        //         ** Dựa vào Object ta có thể hiểu
+        //             - Form là 1 object
+        //             - Input, Checkbox là 1 key
+        //         -> Để truy cập cái key từ biến type ta làm như sau
+        //         Object[key] -> Object = Form, key = type, vì dựa theo biến type ta truyền key theo đề
+        //     */
+        //     // console.log(Form[type]);
+
+        //     /* 
+        //         Để render Form[type] ở trong <div id="wrapper"> làm như sau
+        //             - Tạo ra 1 cái biến theo quy ước đặt tên
+        //             - Gán Form[type] vào biến đã tạo
+        //             - Render Component vào trong <div id="wrapper">
+        //                 -> Lúc này đã theo đúng quy tắc của JSX
+                
+        //         ** K thể truyền <Form[type] /> vào trong <div id="wrapper"> được vì:
+        //             - Dấu [] k theo quy tắc của JSX -> Lỗi
+        //     */
+        //     const Component = Form[type];
+
+        //     return (
+        //         <div id="wrapper"> 
+        //             <Component />
+        //         </div>
+        //     )
+        // }
+
+        // index.js
+        // ReactDOM.render(<App />, document.getElementById('root'))
+
+    // ----------------------------------------------------------------
+        // VD3
+
+        function Button() {
+
+        }
+
+        // App.js
+        function App() {
+            return (
+                <div id="wrapper"> 
+                    
+                </div>
+            )
+        }
+
+        // index.js
+        ReactDOM.render(<App />, document.getElementById('root'))
+
+
+    </script>
+</body>
+
+</html>
